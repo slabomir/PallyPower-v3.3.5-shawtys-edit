@@ -555,7 +555,7 @@ end
 function PallyPower:PerformCycle(name, class, skipzero)
 	local shift = IsShiftKeyDown()
 
-	if shift then class = 4 end
+	if shift then class = 7 end
 
 	if not PallyPower_Assignments[name] then
 		PallyPower_Assignments[name] = { }
@@ -569,14 +569,14 @@ function PallyPower:PerformCycle(name, class, skipzero)
 
 	PallyPower_Assignments[name][class] = 0
 
-	for test = cur+1, 5 do
+	for test = cur+1, 7 do
 		if PallyPower:CanBuff(name, test) and (PallyPower:NeedsBuff(class, test) or shift) then
 			cur = test
 			do break end
 		end
 	end
 
-	if cur == 5 then
+	if cur == 7 then
 		if skipzero then
 			cur = 1
 		else
@@ -598,17 +598,17 @@ end
 function PallyPower:PerformCycleBackwards(name, class, skipzero)
 	local shift=IsShiftKeyDown()
 
-	if shift then class=4 end
+	if shift then class=7 end
 
 	if not PallyPower_Assignments[name] then
 		PallyPower_Assignments[name] = { }
 	end
 
 	if not PallyPower_Assignments[name][class] then
-		cur=5
+		cur=7
 	else
 		cur=PallyPower_Assignments[name][class]
-		if cur == 0 or skipzero and cur == 1 then cur = 5 end
+		if cur == 0 or skipzero and cur == 1 then cur = 7 end
 	end
 
 	PallyPower_Assignments[name][class] = 0
@@ -708,18 +708,18 @@ function PallyPower:AssignPlayerAsClass(pname, pclass, tclass)
 end
 
 function PallyPower:CanBuff(name, test)
-	if test==5 then
-		return true
-	end
+	-- if test==7 then
+	-- 	return true
+	-- end
 
-	if (not AllPallys[name][test]) or (AllPallys[name][test].rank == 0) then
-		return false
-	end
+	-- if (not AllPallys[name][test]) or (AllPallys[name][test].rank == 0) then
+	-- 	return false
+	-- end
 	return true
 end
 
 function PallyPower:NeedsBuff(class, test, playerName)
-	if test==5 or test==0 then
+	if test==7 or test==0 then
 		return true
 	end
 
